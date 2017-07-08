@@ -17,10 +17,11 @@ class MeiziSpider(scrapy.Spider):
         image_urls = response.css('img').xpath('@src').extract()
         next_page = response.xpath(
             '//a[contains(@title, "Older Comments")]/@href').extract_first()
+
         print(next_page)
-        for href in image_urls:
-            print("the %d image url:%s" % (MeiziSpider.image_count,href))
-            MeiziSpider.image_count += 1
+        #for href in image_urls:
+        #    print("the %d image url:%s" % (MeiziSpider.image_count,href))
+        #    MeiziSpider.image_count += 1
         yield MeizituItem(image_urls=image_urls)
 
         yield scrapy.Request(next_page , callback=self.parse)
